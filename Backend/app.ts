@@ -8,7 +8,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-    origin:["http://localhost:5173","https://ocr-adhar.vercel.app/"]
+    origin:["http://localhost:5173","https://ocr-adhar-e0ua4gdoh-nijas-mas-projects.vercel.app/"]
 }))
 app.use('/',router)
 const port = process.env.PORT || 8000;
