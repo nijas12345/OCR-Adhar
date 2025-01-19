@@ -122,7 +122,7 @@ export default function App(): JSX.Element {
     }
   }
   const axiosInstance = axios.create({
-    baseURL: "http://localhost:8000",
+    baseURL: "https://ocr-adhar-1.onrender.com",
   });
   
   return (

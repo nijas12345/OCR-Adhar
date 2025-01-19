@@ -8,11 +8,11 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-    origin:"http://localhost:5173"
+    origin:["http://localhost:5173","https://ocr-adhar.vercel.app/"]
 }))
 app.use('/',router)
-
+const port = process.env.PORT || 8000;
   
 app.listen(process.env.PORT, () => {
-  console.log(`Server is running at http://localhost:${process.env.PORT}`);
+  console.log(`Server is running at http://localhost:${port}`);
 });
