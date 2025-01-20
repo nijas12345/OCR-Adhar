@@ -88,6 +88,11 @@ export default function App(): JSX.Element {
   };
 
   const handleParseAadhar:()=>void = async() =>{
+    const resonse = await axiosInstance.get('/send')
+        if(resonse.status==200){
+          console.log("hello");
+          
+        }
      if(!frontImage || !backImage){
       toast.error("Please upload both Frontend and Backend Aadhar images")
       return 
