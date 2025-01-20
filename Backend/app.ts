@@ -4,8 +4,8 @@ import cors from 'cors'
 
 import router from "./Routes/route";
 
-dotenv.config();
 const app = express();
+dotenv.config();
 
 app.use(cors({
     origin:["https://ocr-adhar.vercel.app/","http://localhost:5173"],
@@ -14,6 +14,6 @@ app.use(cors({
 app.use('/',router)
 const port = process.env.PORT || 8000;
   
-app.listen(process.env.PORT, () => {
+app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
