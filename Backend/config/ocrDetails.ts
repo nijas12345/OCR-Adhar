@@ -1,6 +1,5 @@
 
-
-const extractName = (text:any) => {
+const extractName = (text:string) => {
     const lines = text.split('\n');
     let name = '';
 
@@ -19,7 +18,7 @@ const extractName = (text:any) => {
     return name;
 };
 
-const extractPincode = (address:any) => {
+const extractPincode = (address:string) => {
     const pincodeMatch = address.match(/\b\d{6}\b/);
     const pincodeIndex = pincodeMatch ? address.indexOf(pincodeMatch[0]) : -1;
 
@@ -29,7 +28,7 @@ const extractPincode = (address:any) => {
     };
 };
 
-const cleanAddress = (address: any): string => {
+const cleanAddress = (address: string): string => {
     // Check if "S/O", "W/O", or "D/O" exists and start from there
     const match = address.match(/\b(S\/O|W\/O|D\/O)\b/i);
     if (match) {
@@ -63,7 +62,7 @@ const formatFinalAddress = (address: string): string => {
         + '.';
 };
 
-export const extractAadhaarDetails = (frontText:any, backText:any) => {
+export const extractAadhaarDetails = (frontText:string, backText:string) => {
     const details = {
         name: '',
         aadhaarNumber: '',
@@ -73,6 +72,8 @@ export const extractAadhaarDetails = (frontText:any, backText:any) => {
         pincode: ''
     };
 const frontLines = frontText.split('\n');
+console.log(frontLines);
+
 frontLines.forEach((line: string) => {
     const aadhaarMatch = line.match(/[0-9]{4}\s[0-9]{4}\s[0-9]{4}/);
     if (aadhaarMatch) {
@@ -100,7 +101,7 @@ frontLines.forEach((line: string) => {
 
     details.name = extractName(frontText);
     const backLines = backText.split('\n');
-    let addressLines:any = [];
+    let addressLines:string[] = [];
     let isAddress = false;
 
     backLines.forEach((line: string) => {

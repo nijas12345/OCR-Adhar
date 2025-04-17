@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { upload } from '../config/multer';
 import { v1 as vision } from '@google-cloud/vision';
 import path from 'path';
 import { extractAadhaarDetails } from "../config/ocrDetails";
@@ -10,16 +9,18 @@ const client = new vision.ImageAnnotatorClient({
 
 export const parseAadhaarData = async (req: Request, res: Response) => {
   try {
-    // Ensure files are available in req.files
+    
     const files = req.files as { [fieldname: string]: Express.Multer.File[] };
 
     if (files.frontImage && files.backImage) {
-      const frontImagePath = path.resolve(files.frontImage[0].path);
-      const backImagePath = path.resolve(files.backImage[0].path);
 
-      const [frontResult] = await client.textDetection(frontImagePath);
-      const [backResult] = await client.textDetection(backImagePath);
+      const frontImageBuffer = files.frontImage[0].buffer;
+      const backImageBuffer = files.backImage[0].buffer;
 
+      const [frontResult] = await client.textDetection(frontImageBuffer);
+      const [backResult] = await client.textDetection(backImageBuffer);
+      console.log(frontResult);
+      
       const frontText = frontResult.textAnnotations?.[0]?.description || 'No text detected';
       const backText = backResult.textAnnotations?.[0]?.description || 'No text detected';
 
